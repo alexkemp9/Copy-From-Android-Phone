@@ -1,0 +1,99 @@
+#!/bin/bash
+#
+# ~/.copyFromPhone
+#
+# Copy photos+podcasts+osmtracker from phone to ~/
+#
+# 2023-04-14 moved to ~/.sbin/
+# 2018-08-08 started
+
+GENERAL_ERROR=1
+NOT_A_DIR=66
+ALREADY_MOUNTED=67
+
+PHONE="SD card"
+CAMERA="Camera"
+FUSERMOUNT="/bin/fusermount"
+JMTPFS="/usr/bin/jmtpfs"
+LOCAL="/home/alexk/Pictures/Android"
+MOUNTDIR="/media/alexk/disk"
+MOUNTPOINT="/bin/mountpoint"
+OSMTRACKER="osmtracker"
+PODCAST="Records"
+RSYNC="/usr/bin/rsync -aP"
+# PHONE="Internal storage"
+# CAMERA="Internal storage/DCIM/Camera"
+
+# pre-checks
+# 1. $MOUNTDIR needs to pre-exist, but $CAMERA must not yet be mounted
+if [ ! -d "$MOUNTDIR" ] # file is NOT a directory
+then
+  echo "ERROR: The directory '$MOUNTDIR' does NOT exist"
+  echo "('$MOUNTDIR' used as mount-point for camera/phone)"
+  exit $NOT_A_DIR
+else
+  if $MOUNTPOINT -q "$MOUNTDIR"
+  then
+    echo "ERROR: Cannot continue; something is mounted at '$MOUNTDIR'"
+    echo "(If camera, unmount using 'fusermount -u $MOUNTDIR', then try again)"
+    exit $ALREADY_MOUNTED
+  fi
+fi
+
+# Show summary of action
+echo "!! REMEMBER TO UNLOCK SCREEN !!"
+echo "!! Unmount phone if necessary !!"
+echo -n "Mount phone at '$MOUNTDIR'; copy files at 'phone:$CAMERA' to '$LOCAL'. "
+
+# Give option to drop-out of script
+read -p "Continue? (y/n): " -n 1 -r
+echo    # move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  echo "Script continues…"
+else
+  echo "Script abandoned."
+  exit 0
+fi
+
+# OK; ready to go...
+# 1. mount the phone
+# 2. copy files to desktop
+# 3. unmount the phone
+if ! $JMTPFS "$MOUNTDIR"
+then
+  echo "Error whilst mounting the phone/camera"
+  exit $GENERAL_ERROR
+fi
+
+# show/copy camera stuff
+ls "$MOUNTDIR/$PHONE/DCIM/$CAMERA"
+
+if ! $RSYNC "$MOUNTDIR/$PHONE/DCIM/$CAMERA" "$LOCAL/DCIM/"
+then
+  echo "Error whilst rsyncing $MOUNTDIR/$PHONE/DCIM/$CAMERA to $LOCAL/DCIM/"
+fi
+
+# show/copy podcast stuff
+ls "$MOUNTDIR/$PHONE/$PODCAST"
+
+if ! $RSYNC "$MOUNTDIR/$PHONE/$PODCAST" "$LOCAL/"
+then
+  echo "Error whilst rsyncing $MOUNTDIR/$PHONE/$PODCAST to '$LOCAL/'"
+fi
+
+# show/copy osm stuff
+ls "$MOUNTDIR/$PHONE/$OSMTRACKER"
+
+if ! $RSYNC "$MOUNTDIR/$PHONE/$OSMTRACKER" "$LOCAL/"
+then
+  echo "Error whilst rsyncing $MOUNTDIR/$PHONE/$OSMTRACKER to '$LOCAL/'"
+fi
+
+if ! $FUSERMOUNT -uz "$MOUNTDIR"
+then
+  echo "Error whilst unmounting phone using '$FUSERMOUNT -u $MOUNTDIR'"
+  exit $GENERAL_ERROR
+fi
+
+exit 0

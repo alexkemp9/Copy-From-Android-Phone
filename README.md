@@ -34,8 +34,21 @@ The point is that early Android phones could be directly mounted via their USB p
 MTP may well need to be explicitly switched ON in your phone. For me (ancient Android 6), that was done by:–
 
 1. The `Settings > Developer options` menu-option is hidden until you touch `Build number` in the `About phone` menu 7 times (no kidding).
-2. Open `Developer options
+2. Open `Developer options`
 3. (if necessary) Switch ON at the top
 4. Scroll down to `Select USB Configuration`
 (select MTP over PTP or other setting)
 
+***FUSERMOUNT***     
+I'm uncertain precisely how to install *FUSERMOUNT*, because I installed it so many years ago & now can neither remember nor locate. It looks like it may have been auto-installed when I installed something else, with `libfuse2` the most likely culprit (check out also [GitHub libfuse](https://github.com/libfuse/libfuse):
+
+```bash
+$ apt search libfuse2
+Sorting... Done
+Full Text Search... Done
+libfuse2/stable,now 2.9.9-5 amd64 [installed,automatic]
+  Filesystem in Userspace (library)
+
+$ /bin/fusermount -V
+fusermount version: 2.9.9
+```

@@ -13,7 +13,7 @@ $ la ~/.local/sbin/copyFromPhone
 -rwx------ 1 user user 2287 Jul 12  2021 /home/user/.local/sbin/copyFromPhone
 ```
 ## *JMTPFS, MTP & FUSERMOUNT*
-All of the Apps used are standard for a Linux desktop system, with the exception of *JMTPFS* (and possibly FUSERMOUNT), although it can be installed from standard Repositories:
+All of the Apps used are standard for a Linux desktop system, with the exception of *JMTPFS* (and possibly *FUSERMOUNT*), although it can be installed from standard Repositories:
 
 ```bash
 $ apt search jmtpfs
@@ -132,4 +132,4 @@ osmtracker/data/files/track7/2021-08-01_08-55-10.jpg
       2,099,899 100%    3.15MB/s    0:00:00 (xfr#92, to-chk=0/97)
 ```
 
-4. (the phone is auto-unmounted after transfers complete, so the phone can now be detached)
+4. (the phone is unmounted by the script after transfers complete, so the phone can now be detached)

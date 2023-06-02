@@ -73,12 +73,13 @@ The phone device should now appear within a File Manager (mine is *thunar*) but 
 (any new files will auto-transfer via rsync):
 
 ```bash
+Mount phone at '/media/alexk/disk'; copy files at 'phone:Camera' to '/home/alexk/Pictures/Android'. Continue? (y/n): y
 Script continues…
 Device 0 (VID=19d2 and PID=0307) is a ZTE V880E.
 Android device detected, assigning default bug flags
 IMG_20230525_160030.jpg  VID_20230525_161106.mp4
 sending incremental file list
-created directory /home/alexk/Pictures/Android/DCIM
+created directory /home/user/Pictures/Android/DCIM
 Camera/
 Camera/IMG_20230525_160030.jpg
         763,896 100%   99.61MB/s    0:00:00 (xfr#1, to-chk=1/3)
@@ -131,4 +132,4 @@ osmtracker/data/files/track7/2021-08-01_08-55-10.jpg
       2,099,899 100%    3.15MB/s    0:00:00 (xfr#92, to-chk=0/97)
 ```
 
-4. (the phone is auto-unmounted after transfers complete, so the phone can now be detached.
+4. (the phone is auto-unmounted after transfers complete, so the phone can now be detached)

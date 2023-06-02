@@ -4,7 +4,7 @@
 #
 # Copy photos+podcasts+osmtracker from phone to ~/
 #
-# 2023-04-14 moved to ~/.sbin/
+# 2023-04-14 moved to ~/.local/sbin/
 # 2018-08-08 started
 
 GENERAL_ERROR=1
@@ -15,8 +15,8 @@ PHONE="SD card"
 CAMERA="Camera"
 FUSERMOUNT="/bin/fusermount"
 JMTPFS="/usr/bin/jmtpfs"
-LOCAL="/home/alexk/Pictures/Android"
-MOUNTDIR="/media/alexk/disk"
+LOCAL="/home/user/Pictures/Android"
+MOUNTDIR="/media/user/disk"
 MOUNTPOINT="/bin/mountpoint"
 OSMTRACKER="osmtracker"
 PODCAST="Records"

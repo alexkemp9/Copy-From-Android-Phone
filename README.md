@@ -34,11 +34,11 @@ The point is that early Android phones could be directly mounted via their USB p
 MTP may well need to be explicitly switched ON in your phone. For me (ancient Android 6 and then — when that model died suddenly in June 23 — in Android 12), that was done by:–
 
 1. The `Settings > Developer options` menu-option is hidden until you touch `Build number` in the `About phone` menu 7 times (no kidding).
-2. Open `Developer options`
+2. Open `Developer options`    
 (Android 12: found bottom of `Settings | System`)
 3. (if necessary) Switch ON at the top
-4. Scroll down to `Select USB Configuration`
-(select MTP over PTP or other setting)
+4. Scroll down to `Select USB Configuration`    
+(select MTP over PTP or other setting)    
 (Android 12: `Default USB Configuration | File Transfer`)
 
 ***FUSERMOUNT***     
@@ -58,7 +58,7 @@ fusermount version: 2.9.9
 ## *Usage*
 Once setup, usage is dead easy:
 
-1. Unlock the phone & connect via a USB cable to your desktop computer
+1. Unlock the phone & connect via a USB cable to your desktop computer    
 (at this stage some phones ask to choose protocol, with *MTP* as the required option)
 2. Launch `copyFromPhone`:
 
@@ -71,7 +71,7 @@ Mount phone at '/media/user/disk'; copy files at 'phone:Camera' to '/home/user/P
 
 The phone device should now appear within a File Manager (mine is *thunar*) but if auto-mounted needs to be *unmounted* before pressing *‘y’*.
 
-3. Press *‘y’*
+3. Press *‘y’*    
 (any new files will auto-transfer via rsync):
 
 ```bash

@@ -31,13 +31,15 @@ If you look at [Github JMTPFS](https://github.com/JasonFerrara/jmtpfs) it is des
 The point is that early Android phones could be directly mounted via their USB port as *Mass Storage*; that gave Linux direct access to the system and allowed (as one example) easy undo of deleted files. Modern phones  can still be mounted via the USB port, but only via *MTP*, which essentially is connecting via a modem.
 
 ***MTP***     
-MTP may well need to be explicitly switched ON in your phone. For me (ancient Android 6), that was done by:–
+MTP may well need to be explicitly switched ON in your phone. For me (ancient Android 6 and then — when that model died suddenly in June 23 — in Android 12), that was done by:–
 
 1. The `Settings > Developer options` menu-option is hidden until you touch `Build number` in the `About phone` menu 7 times (no kidding).
 2. Open `Developer options`
+(Android 12: found bottom of `Settings | System`)
 3. (if necessary) Switch ON at the top
 4. Scroll down to `Select USB Configuration`
 (select MTP over PTP or other setting)
+(Android 12: `Default USB Configuration | File Transfer`)
 
 ***FUSERMOUNT***     
 I'm uncertain precisely how to install *FUSERMOUNT*, because I installed it so many years ago & now can neither remember nor locate. It looks like it may have been auto-installed when I installed something else, with `libfuse2` the most likely culprit (check out also [GitHub libfuse](https://github.com/libfuse/libfuse)):

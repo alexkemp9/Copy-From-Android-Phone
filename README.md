@@ -150,7 +150,7 @@ No mtp devices found
 - The phone must NOT be mounted before running the script    
 (that error is spotted in the script & how to unmount using FUSERMOUNT is suggested)
 - The phone screen must be unlocked    
-(the main reason for errors)
+(the normal main reason for errors)
 - The phone must be recognised by the computer when USB is plugged in
 
 *Android 12 Checklist:*
@@ -166,3 +166,15 @@ $ sudo dmesg | tail
 [673466.929440] usb 3-1.3: SerialNumber: A52EEA0000035524
 ```
 If you do not see something like the above, then try the steps below on your phone:
+
+In `System | Developer options`:–    
+- USB debugging :: ON
+- Disable adb authorisation timeout :: OFF
+- Verify apps over USB :: OFF
+- Default USB configuration :: File transfer
+- Reset notification importance
+- Standby apps :: Files :: ACTIVE
+
+Before the above I discovered that the phone was NOT discovered by the system (dmesg) after it's usb was plugged into the computer. After the above (many changes) removing & re-plugging the USB caused the phone to immediately be recognised, and the script operated normally.
+
+HTH

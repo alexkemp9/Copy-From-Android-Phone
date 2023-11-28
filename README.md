@@ -135,3 +135,34 @@ osmtracker/data/files/track7/2021-08-01_08-55-10.jpg
 ```
 
 4. (the phone is unmounted by the script after transfers complete, so the phone can now be detached)
+
+## *Problems*
+Life has been easy with this script until I got an Android 12 phone. It’s tendency is to switch off services that are not regularly used. That is a problem for an old codger like me that does not use the phone much. This hit me recently as I tried to copy a picture of my water meter to the computer so that I could send it to *Severn Trent* (use email on my phone? no thanks). I'm not fully certain that all of what is below was necessary to fix the issue, but here it is anyway.
+
+*Symptom:* An error occured whilst attempting to mount the phone (after pressing *‘y’* to *“Continue”*) (the first comes from the script, whilst the other comes from JMTPFS):
+
+```bash
+Error whilst mounting the phone/camera
+No mtp devices found
+```
+
+*Basics:*    
+- The phone must NOT be mounted before running the script    
+(that error is spotted in the script & how to unmount using FUSERMOUNT is suggested)
+- The phone screen must be unlocked    
+(the main reason for errors)
+- The phone must be recognised by the computer when USB is plugged in
+
+*Android 12 Checklist:*
+Run the following immediately after plugging USB from the phone into the computer:
+
+```bash
+$ sudo dmesg | tail
+[673466.819292] usb 3-1.3: new high-speed USB device number 7 using ehci-pci
+[673466.929404] usb 3-1.3: New USB device found, idVendor=1782, idProduct=4003, bcdDevice= 4.04
+[673466.929422] usb 3-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[673466.929430] usb 3-1.3: Product: A52
+[673466.929435] usb 3-1.3: Manufacturer: Blackview
+[673466.929440] usb 3-1.3: SerialNumber: A52EEA0000035524
+```
+If you do not see something like the above, then try the steps below on your phone:
